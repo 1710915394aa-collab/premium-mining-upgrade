@@ -1,527 +1,460 @@
 ﻿<!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>中原科技 - 比特币矿机与托管</title>
+  <title>Home - MinersKing</title>
+  <meta name="description" content="MinersKing supplies ASIC miners, mining solutions, fast delivery, and technical support for global buyers.">
   <style>
     :root {
-      --dark:#0f172a;
-      --darker:#0b1220;
-      --green:#22c55e;
-      --green-2:#16a34a;
-      --light:#f5f7fb;
-      --card:#ffffff;
-      --muted:#64748b;
+      --bg: #f4f7fb;
+      --surface: #ffffff;
+      --surface-soft: #eef4fb;
+      --text: #0f172a;
+      --muted: #64748b;
+      --line: #dbe5f0;
+      --brand: #2058d4;
+      --brand-dark: #163ea4;
+      --accent: #f97316;
+      --success: #16a34a;
+      --shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+      --radius-xl: 24px;
+      --radius-lg: 18px;
+      --max: 1240px;
     }
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;line-height:1.6;color:#0f172a;background:var(--light)}
-    a{text-decoration:none;color:inherit}
-    img{max-width:100%;display:block}
-    .container{max-width:1200px;margin:0 auto;padding:0 20px}
-    header{position:sticky;top:0;z-index:20;background:rgba(11,18,32,0.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,0.04)}
-    header .container{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
-    header h1{font-size:24px;font-weight:800;letter-spacing:0.4px;color:#fff}
-    nav{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
-    nav a{color:#e2e8f0;font-weight:600;font-size:15px;position:relative;padding:6px 0}
-    nav a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--green);transition:.25s}
-    nav a:hover::after{width:100%}
-    .lang-switch{display:flex;align-items:center;gap:8px}
-    .lang-btn{padding:6px 12px;border:1px solid rgba(255,255,255,.35);background:transparent;color:#e2e8f0;border-radius:999px;font-size:12px;cursor:pointer;transition:.25s;font-weight:700}
-    .lang-btn.active{background:var(--green);border-color:var(--green);color:var(--dark)}
-    section{padding:80px 0}
-    #home{background:linear-gradient(140deg,var(--dark),#111a33);color:#fff;text-align:center;padding:110px 0 100px;margin-bottom:20px;overflow:hidden;position:relative}
-    #home::after{content:"";position:absolute;inset:0;background:radial-gradient(900px at 80% 20%,rgba(34,197,94,.18),transparent),radial-gradient(700px at 10% 10%,rgba(94,234,212,.12),transparent)}
-    #home .container{position:relative;z-index:1}
-    #home h2{font-size:44px;margin-bottom:20px;line-height:1.2}
-    #home p{font-size:18px;color:rgba(226,232,240,.9);max-width:700px;margin:0 auto 32px}
-    .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(120deg,var(--green),var(--green-2));color:var(--dark);padding:14px 26px;border:none;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer;box-shadow:0 12px 30px rgba(34,197,94,.25);transition:transform .2s,box-shadow .2s}
-    .btn.secondary{background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.2);box-shadow:none}
-    .btn:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(34,197,94,.3)}
-    .pill{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.08);color:#e2e8f0;padding:10px 16px;border-radius:999px;font-size:13px;margin-bottom:18px}
-    h2.section-title{text-align:center;font-size:32px;margin-bottom:16px;color:var(--dark)}
-    p.section-note{text-align:center;color:var(--muted);margin-bottom:36px}
-    .product-grid,.service-grid,.hosting-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px}
-    .card{background:var(--card);border-radius:16px;padding:22px;box-shadow:0 10px 30px rgba(15,23,42,.06);border:1px solid rgba(15,23,42,.06);position:relative;overflow:hidden}
-    .card::after{content:"";position:absolute;inset:0;border-radius:16px;border:1px solid transparent;background:linear-gradient(120deg,rgba(34,197,94,.35),rgba(34,197,94,0)) border-box;mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);mask-composite:xor;opacity:0;transition:.25s}
-    .card:hover::after{opacity:1}
-    .product-card h3{font-size:18px;margin-bottom:10px;color:var(--dark)}
-    .hashrate{font-size:28px;font-weight:800;color:var(--green-2);margin-bottom:10px}
-    .price{font-size:20px;font-weight:800;color:var(--dark);margin-bottom:14px}
-    .tag{display:inline-block;padding:6px 10px;background:rgba(34,197,94,.12);color:var(--green-2);border-radius:999px;font-size:12px;font-weight:700;margin-bottom:10px}
-    .price-table{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
-    .row{background:var(--card);border:1px solid rgba(15,23,42,.06);border-radius:14px;padding:16px;box-shadow:0 10px 30px rgba(15,23,42,.06)}
-    .row-head{display:flex;justify-content:space-between;font-weight:800;color:var(--muted);margin-bottom:6px;font-size:13px}
-    .row div{margin:4px 0}
-    .price-img{width:100%;height:170px;object-fit:contain;border-radius:10px;background:#f8fafc;padding:8px;margin:6px 0 10px}
-    #hosting .card h3{margin-bottom:8px;font-size:18px}
-    #hosting .card p{color:var(--muted)}
-    #about p{font-size:17px;color:#334155;margin-bottom:12px}
-    .contact-info{text-align:center;color:#1e293b;margin-bottom:18px}
-    .contact-form{max-width:640px;margin:0 auto;display:grid;gap:14px}
-    .contact-form input,.contact-form textarea{width:100%;padding:14px 16px;border:1px solid #d9e0eb;border-radius:12px;font-size:15px;background:#fff;transition:border-color .2s,box-shadow .2s}
-    .contact-form input:focus,.contact-form textarea:focus{outline:none;border-color:var(--green-2);box-shadow:0 0 0 3px rgba(34,197,94,.18)}
-    footer{background:var(--darker);color:#e2e8f0;text-align:center;padding:20px 0;margin-top:60px;font-size:14px}
-    /* 模态 */
-    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:50;padding:18px}
-    .modal-overlay.active{display:flex}
-    .modal{background:#fff;border-radius:16px;max-width:820px;width:100%;padding:22px;box-shadow:0 25px 70px rgba(0,0,0,.2)}
-    .modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-    .modal-title{font-size:18px;font-weight:800;color:var(--dark)}
-    .modal-close{background:transparent;border:none;font-size:22px;cursor:pointer;color:var(--muted)}
-    .pay-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
-    .pay-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:12px;text-align:center;box-shadow:0 8px 24px rgba(15,23,42,.04)}
-    .pay-card h4{margin:8px 0 4px;font-size:15px;color:var(--dark)}
-    .pay-card p{color:var(--muted);font-size:13px;line-height:1.5;word-break:break-all}
-    @media(max-width:768px){header .container{flex-direction:column;align-items:flex-start}#home h2{font-size:34px}nav{gap:14px}}
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Arial, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: linear-gradient(180deg, #f7faff 0%, var(--bg) 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button, input, textarea { font: inherit; }
+    .container { width: min(var(--max), calc(100% - 32px)); margin: 0 auto; }
+    .topbar { background: #081120; color: #d9e2f1; font-size: 13px; }
+    .topbar .container {
+      min-height: 42px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 8px 0;
+    }
+    .topbar-right { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    header {
+      position: sticky; top: 0; z-index: 30; background: rgba(255,255,255,0.96); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+    }
+    .header-main {
+      min-height: 90px; display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    }
+    .brand { display: flex; align-items: center; gap: 14px; font-weight: 800; }
+    .brand-mark {
+      width: 50px; height: 50px; border-radius: 16px; display: grid; place-items: center; background: linear-gradient(135deg, var(--brand), var(--brand-dark)); color: white; font-size: 26px; box-shadow: 0 12px 28px rgba(32, 88, 212, 0.24);
+    }
+    .brand-copy strong { display: block; font-size: 24px; }
+    .brand-copy span { display: block; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em; }
+    .nav-wrap { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; justify-content: flex-end; flex: 1; }
+    nav { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; font-size: 14px; font-weight: 700; color: #334155; }
+    nav details { position: relative; }
+    nav summary { list-style: none; cursor: pointer; }
+    nav summary::-webkit-details-marker { display: none; }
+    .dropdown {
+      position: absolute; top: calc(100% + 12px); left: 0; min-width: 230px; background: white; border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow); padding: 10px; display: grid; gap: 4px;
+    }
+    .dropdown a { padding: 9px 12px; border-radius: 10px; color: var(--muted); font-weight: 600; }
+    .dropdown a:hover { background: var(--surface-soft); color: var(--text); }
+    .header-tools { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .tool-chip { padding: 10px 12px; border-radius: 999px; background: var(--surface-soft); color: var(--muted); font-size: 13px; font-weight: 700; }
+    .lang-switch { display: inline-flex; padding: 4px; border-radius: 999px; background: var(--surface-soft); }
+    .lang-btn { border: 0; background: transparent; padding: 8px 12px; border-radius: 999px; color: var(--muted); cursor: pointer; font-size: 12px; font-weight: 700; }
+    .lang-btn.active { background: var(--brand); color: white; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 0; border-radius: 999px; padding: 13px 20px; font-weight: 700; cursor: pointer; transition: transform 0.2s ease; }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary { background: linear-gradient(135deg, var(--brand), var(--brand-dark)); color: white; box-shadow: 0 12px 28px rgba(32, 88, 212, 0.24); }
+    .btn-secondary { background: white; color: var(--text); border: 1px solid var(--line); }
+    .btn-accent { background: linear-gradient(135deg, #fb923c, var(--accent)); color: white; box-shadow: 0 12px 28px rgba(249, 115, 22, 0.24); }
+    .hero { padding: 30px 0 24px; }
+    .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 18px; }
+    .hero-main {
+      position: relative; overflow: hidden; border-radius: 28px; padding: 40px; background: linear-gradient(135deg, #091120 0%, #0f172a 44%, #123770 100%); color: white; box-shadow: var(--shadow); min-height: 450px;
+    }
+    .hero-main::after {
+      content: ""; position: absolute; width: 360px; height: 360px; border-radius: 999px; background: radial-gradient(circle, rgba(59,130,246,0.34), transparent 70%); top: -110px; right: -90px;
+    }
+    .hero-badge { display: inline-flex; padding: 8px 12px; border-radius: 999px; background: rgba(255,255,255,0.1); color: #d8e5ff; text-transform: uppercase; font-size: 12px; letter-spacing: 0.12em; margin-bottom: 16px; }
+    .hero-main h1 { max-width: 12ch; font-size: clamp(38px, 6vw, 60px); line-height: 1.05; margin-bottom: 14px; position: relative; z-index: 1; }
+    .hero-main p { max-width: 620px; color: #d2ddf0; font-size: 18px; position: relative; z-index: 1; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 22px; position: relative; z-index: 1; }
+    .hero-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 24px; position: relative; z-index: 1; }
+    .stat-card { border-radius: 18px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.08); padding: 16px; }
+    .stat-card strong { display: block; font-size: 28px; margin-bottom: 4px; }
+    .stat-card span { color: #c9d7ed; font-size: 13px; }
+    .hero-side { display: grid; gap: 18px; }
+    .card, .about-panel, .highlight-panel, .feature-card, .catalog-card, .blog-card, .partner-card, .contact-card, .footer-card { background: white; border: 1px solid rgba(15,23,42,0.06); border-radius: var(--radius-xl); box-shadow: var(--shadow); }
+    .side-card { padding: 24px; display: grid; gap: 12px; }
+    .side-card h3 { font-size: 22px; }
+    .side-card p { color: var(--muted); }
+    .chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .mini-chip { padding: 8px 12px; border-radius: 999px; background: var(--surface-soft); color: var(--brand-dark); font-size: 12px; font-weight: 700; }
+    section { padding: 28px 0 68px; }
+    .section-head { display: flex; justify-content: space-between; gap: 16px; align-items: end; margin-bottom: 24px; flex-wrap: wrap; }
+    .section-head h2 { font-size: clamp(28px, 4.6vw, 42px); }
+    .section-head p { max-width: 700px; color: var(--muted); }
+    .about-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 18px; }
+    .about-panel, .highlight-panel, .contact-card, .footer-card { padding: 26px; }
+    .timeline { display: grid; gap: 14px; }
+    .timeline-item { display: grid; grid-template-columns: 88px 1fr; gap: 18px; padding: 16px; border-radius: var(--radius-lg); background: var(--surface-soft); }
+    .timeline-year { color: var(--brand); font-size: 28px; font-weight: 800; line-height: 1; }
+    .timeline-item h3 { font-size: 18px; margin-bottom: 6px; }
+    .timeline-item p { color: var(--muted); }
+    .highlight-panel { background: linear-gradient(180deg, #ffffff 0%, #f5f9ff 100%); display: grid; align-content: center; gap: 16px; }
+    .bullet-list { display: grid; gap: 10px; }
+    .bullet-list li { list-style: none; position: relative; padding-left: 18px; color: var(--muted); }
+    .bullet-list li::before { content: ""; position: absolute; left: 0; top: 10px; width: 8px; height: 8px; border-radius: 999px; background: var(--success); }
+    .feature-grid, .catalog-grid, .blog-grid, .partner-grid, .footer-grid { display: grid; gap: 16px; }
+    .feature-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .catalog-grid, .blog-grid, .partner-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .footer-grid { grid-template-columns: 1.2fr 0.8fr 0.8fr 0.8fr; }
+    .feature-card { padding: 24px; display: grid; gap: 12px; }
+    .feature-icon { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; font-weight: 800; color: var(--brand); background: linear-gradient(135deg, #dbeafe, #eff6ff); }
+    .feature-card h3 { font-size: 22px; }
+    .feature-card p { color: var(--muted); }
+    .catalog-card { padding: 20px; display: grid; gap: 10px; }
+    .catalog-label { display: inline-flex; width: fit-content; padding: 7px 10px; border-radius: 999px; background: var(--surface-soft); color: var(--brand); font-size: 12px; font-weight: 700; }
+    .catalog-card h3 { font-size: 20px; }
+    .catalog-card p { color: var(--muted); font-size: 14px; }
+    .blog-card { overflow: hidden; }
+    .blog-thumb { min-height: 176px; padding: 18px; display: grid; place-items: end start; background: linear-gradient(135deg, #dbeafe, #bfdbfe 52%, #fdba74 100%); color: #0f172a; text-transform: uppercase; font-size: 12px; font-weight: 800; letter-spacing: 0.08em; }
+    .blog-body { padding: 18px; display: grid; gap: 10px; }
+    .blog-body h3 { font-size: 18px; line-height: 1.35; }
+    .blog-body p { color: var(--muted); font-size: 14px; }
+    .partner-card { min-height: 112px; padding: 24px; display: grid; place-items: center; text-align: center; font-weight: 800; letter-spacing: 0.08em; color: #334155; }
+    .contact-grid { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: 18px; }
+    .contact-card { display: grid; gap: 14px; }
+    .contact-card p, .contact-card a { color: var(--muted); }
+    .contact-form { display: grid; gap: 12px; }
+    .contact-form input, .contact-form textarea { width: 100%; padding: 14px 16px; border-radius: 16px; border: 1px solid var(--line); background: #fbfdff; }
+    footer { margin-top: 36px; padding: 48px 0 26px; background: #0b1220; color: #d7dfec; }
+    .footer-card { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.08); box-shadow: none; }
+    .footer-card h3, .footer-card h4 { color: white; margin-bottom: 12px; }
+    .footer-card p, .footer-card a { color: #c0ccdf; }
+    .footer-links { display: grid; gap: 10px; }
+    .footer-bottom { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-top: 20px; margin-top: 24px; border-top: 1px solid rgba(255,255,255,0.08); color: #9fb0ca; font-size: 13px; }
+    .modal-overlay { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; padding: 20px; background: rgba(15,23,42,0.62); z-index: 50; }
+    .modal-overlay.active { display: flex; }
+    .modal { width: min(860px, 100%); background: white; border-radius: 24px; padding: 24px; box-shadow: 0 30px 80px rgba(15,23,42,0.3); }
+    .modal-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .modal-close { width: 40px; height: 40px; border-radius: 999px; border: 0; background: var(--surface-soft); color: var(--muted); cursor: pointer; font-size: 22px; }
+    .modal-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .modal-card { border: 1px solid var(--line); border-radius: 20px; padding: 16px; text-align: center; background: #fbfdff; }
+    .modal-card img { width: 100%; max-height: 260px; object-fit: contain; border-radius: 14px; background: white; padding: 8px; margin-bottom: 12px; }
+    .float-contact { position: fixed; right: 18px; bottom: 18px; width: 58px; height: 58px; border-radius: 999px; border: 0; background: linear-gradient(135deg, var(--brand), var(--brand-dark)); color: white; font-size: 24px; font-weight: 800; box-shadow: 0 18px 42px rgba(32,88,212,0.28); cursor: pointer; z-index: 40; }
+    @media (max-width: 1100px) {
+      .hero-grid, .about-grid, .contact-grid, .feature-grid, .catalog-grid, .blog-grid, .partner-grid, .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 820px) {
+      .header-main { flex-direction: column; align-items: flex-start; padding: 14px 0; }
+      .nav-wrap { width: 100%; justify-content: flex-start; }
+      .hero-grid, .about-grid, .contact-grid, .feature-grid, .catalog-grid, .blog-grid, .partner-grid, .footer-grid, .hero-stats, .modal-grid { grid-template-columns: 1fr; }
+      .hero-main { padding: 28px 24px; min-height: auto; }
+      .timeline-item { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
-  <header>
+  <div class="topbar">
     <div class="container">
-      <h1>中原科技</h1>
-      <nav>
-        <a href="#home" data-i18n="nav_home">首页</a>
-        <a href="#products" data-i18n="nav_products">矿机产品</a>
-        <a href="#prices" data-i18n="nav_prices">价格表</a>
-        <a href="#hosting" data-i18n="nav_hosting">托管</a>
-        <a href="#services" data-i18n="nav_services">服务</a>
-        <a href="#about" data-i18n="nav_about">关于</a>
-        <a href="#contact" data-i18n="nav_contact">联系</a>
-        <div class="lang-switch">
-          <button class="lang-btn active" data-lang="zh">中文</button>
-          <button class="lang-btn" data-lang="en">EN</button>
+      <div data-i18n="top_location">Our Location: 304 North Cardinal St. Dorchester Center, MA 02124</div>
+      <div class="topbar-right">
+        <a href="#contact">Facebook</a>
+        <a href="#contact">Twitter</a>
+        <a href="#contact">WhatsApp</a>
+        <a href="#contact">Telegram</a>
+      </div>
+    </div>
+  </div>
+  <header>
+    <div class="container header-main">
+      <a class="brand" href="#home">
+        <div class="brand-mark">M</div>
+        <div class="brand-copy">
+          <strong>MinersKing</strong>
+          <span data-i18n="brand_sub">ASIC Mining Supplier</span>
         </div>
-      </nav>
+      </a>
+      <div class="nav-wrap">
+        <nav>
+          <a href="#home" data-i18n="nav_home">Home</a>
+          <details>
+            <summary data-i18n="nav_asic">ASIC</summary>
+            <div class="dropdown">
+              <a href="#catalog">Hot-selling</a>
+              <a href="#catalog">Antminer</a>
+              <a href="#catalog">Whatsminer</a>
+              <a href="#catalog">GoldShell</a>
+              <a href="#catalog">Elphapex</a>
+              <a href="#catalog">Bombax</a>
+              <a href="#catalog">IceRiver</a>
+              <a href="#catalog">Avalon</a>
+              <a href="#catalog">JASMINER</a>
+              <a href="#catalog">Graphics Cards</a>
+            </div>
+          </details>
+          <details>
+            <summary data-i18n="nav_solution">MINING SOLUTION</summary>
+            <div class="dropdown">
+              <a href="#solutions">C SERIES - For Home Mining</a>
+              <a href="#solutions">B SERIES - Scalable for Warehouses</a>
+              <a href="#solutions">M SERIES - For WhatsMiner M56/M66</a>
+              <a href="#solutions">BC SERIES - Immersive Mining Container</a>
+              <a href="#solutions">ACCESSORIES</a>
+            </div>
+          </details>
+          <a href="#blogs" data-i18n="nav_blog">Blog</a>
+          <details>
+            <summary data-i18n="nav_about">About Us</summary>
+            <div class="dropdown">
+              <a href="#about">About MinersKing</a>
+              <a href="#contact">Our Warehouses</a>
+            </div>
+          </details>
+          <details>
+            <summary data-i18n="nav_contact">Contact</summary>
+            <div class="dropdown">
+              <a href="#contact">Contact Us</a>
+              <a href="#contact">Join Us</a>
+            </div>
+          </details>
+        </nav>
+        <div class="header-tools">
+          <div class="tool-chip" data-i18n="tool_search">Search</div>
+          <div class="tool-chip" data-i18n="tool_cart">Cart $0.00</div>
+          <div class="lang-switch">
+            <button class="lang-btn active" type="button" data-lang="en">EN</button>
+            <button class="lang-btn" type="button" data-lang="zh">中文</button>
+          </div>
+          <button class="btn btn-primary" type="button" data-modal-trigger="contact" data-i18n="btn_quote">Get Quote</button>
+        </div>
+      </div>
     </div>
   </header>
-
-  <section id="home">
-    <div class="container">
-      <div class="pill" data-i18n="hero_badge">比特币矿机一站式｜现货+托管</div>
-      <h2 data-i18n="home_title">专业比特币矿机解决方案</h2>
-      <p data-i18n="home_desc">S19/S21/T21 等主流机型现货，提供选型、上架、托管与 7x24 运维，交付更快、更稳定。</p>
-      <div class="cta-row">
-        <a class="btn" href="#prices" data-i18n="btn_view_prices">查看现货价格</a>
-        <button class="btn secondary" id="contact-open" type="button" data-i18n="btn_contact">立即咨询</button>
-      </div>
-    </div>
-  </section>
-
-  <section id="products">
-    <div class="container">
-      <h2 class="section-title" data-i18n="section_products">热门矿机</h2>
-      <p class="section-note" data-i18n="products_note">精选高算力、高性价比机型，深圳现货可自提/快递。</p>
-      <div class="product-grid" id="product-grid"></div>
-    </div>
-  </section>
-
-  <section id="prices">
-    <div class="container">
-      <h2 class="section-title" data-i18n="section_prices">现货价格表 / Price List</h2>
-      <p class="section-note" data-i18n="price_note">价格随市场波动，以最终确认单为准；发货地深圳，可代订国际快递/空运/海运。</p>
-      <div class="row-head"><span>Coin</span><span data-i18n="th_model">型号</span><span data-i18n="th_price">价格</span></div>
-      <div class="price-table" id="price-table"></div>
-    </div>
-  </section>
-
-  <section id="hosting">
-    <div class="container">
-      <h2 class="section-title" data-i18n="section_hosting">矿机托管</h2>
-      <p class="section-note" data-i18n="hosting_desc">10-500 台托管，一条龙：上架调试、电力对接、实时运维监控，透明结算。</p>
-      <div class="hosting-grid">
-        <div class="card">
-          <div class="tag" data-i18n="hosting_power">电价 0.055–0.07/kWh</div>
-          <h3 data-i18n="hosting_power_title">电力与上架</h3>
-          <p data-i18n="hosting_power_desc">协助谈判电价，24-72 小时完成上架与算力验证，缩短停机期。</p>
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="hero-main">
+          <div class="hero-badge" data-i18n="hero_badge">Global ASIC supply and mining solution service</div>
+          <h1 data-i18n="hero_title">Integrated mining solutions for global ASIC buyers.</h1>
+          <p data-i18n="hero_desc">MinersKing is committed to providing miners, accessories, and scalable mining solutions, backed by fast delivery and technical support before and after the sale.</p>
+          <div class="hero-actions">
+            <a class="btn btn-accent" href="#catalog" data-i18n="btn_products">Explore Products</a>
+            <a class="btn btn-secondary" href="#about" data-i18n="btn_about">Learn More</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-card"><strong>2011</strong><span data-i18n="hero_stat_one">Established in Shenzhen</span></div>
+            <div class="stat-card"><strong>50+</strong><span data-i18n="hero_stat_two">Expanded team and overseas presence</span></div>
+            <div class="stat-card"><strong>24/7</strong><span data-i18n="hero_stat_three">Pre-sales and after-sales follow-up</span></div>
+          </div>
         </div>
-        <div class="card">
-          <div class="tag" data-i18n="hosting_ops">7x24 监控</div>
-          <h3 data-i18n="hosting_ops_title">运维监控</h3>
-          <p data-i18n="hosting_ops_desc">算力/温度/掉板实时告警，自动派单；支持周报与巡检留痕。</p>
-        </div>
-        <div class="card">
-          <div class="tag" data-i18n="hosting_security">安全透明</div>
-          <h3 data-i18n="hosting_security_title">安全与追踪</h3>
-          <p data-i18n="hosting_security_desc">机房安防+视频抽检，资产编号可追踪；支持单机/混托。</p>
+        <div class="hero-side">
+          <article class="card side-card">
+            <h3 data-i18n="side_title_one">Hot-selling ASIC categories</h3>
+            <p data-i18n="side_desc_one">Antminer, Whatsminer, GoldShell, Elphapex, Bombax, IceRiver, Avalon, JASMINER and graphics card products.</p>
+            <div class="chip-row">
+              <span class="mini-chip">Antminer</span><span class="mini-chip">Whatsminer</span><span class="mini-chip">IceRiver</span><span class="mini-chip">GoldShell</span>
+            </div>
+          </article>
+          <article class="card side-card">
+            <h3 data-i18n="side_title_two">Fast delivery and support</h3>
+            <p data-i18n="side_desc_two">We track logistics and assist customers with product usage, helping miners enjoy a quicker and smoother deployment journey.</p>
+            <div class="chip-row">
+              <button class="btn btn-primary" type="button" data-modal-trigger="pay" data-i18n="btn_payment">Payment Info</button>
+              <button class="btn btn-secondary" type="button" data-modal-trigger="contact" data-i18n="btn_contact_modal">Contact Us</button>
+            </div>
+          </article>
         </div>
       </div>
-    </div>
-  </section>
-
-  <section id="services">
-    <div class="container">
-      <h2 class="section-title" data-i18n="section_services">我们的服务</h2>
-      <div class="service-grid">
-        <div class="card service-card">
-          <h3 data-i18n="svc_install">专业安装</h3>
-          <p data-i18n="svc_install_desc">工程师上门/远程部署，按机型优化风道与功率。</p>
+    </section>
+    <section id="about">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 data-i18n="about_title">About MinersKing</h2>
+            <p data-i18n="about_note">This section follows the live site structure: a short timeline on the left and a commercial value summary on the right.</p>
+          </div>
+          <a class="btn btn-secondary" href="#contact" data-i18n="about_cta">Learn More</a>
         </div>
-        <div class="card service-card">
-          <h3 data-i18n="svc_monitor">运维监控</h3>
-          <p data-i18n="svc_monitor_desc">7×24 实时监控，异常秒级提醒，缩短宕机时间。</p>
-        </div>
-        <div class="card service-card">
-          <h3 data-i18n="svc_support">技术支持</h3>
-          <p data-i18n="svc_support_desc">固件升级、算力优化、掉板/过温排查全流程支撑。</p>
-        </div>
-        <div class="card service-card">
-          <h3 data-i18n="svc_warranty">售后保障</h3>
-          <p data-i18n="svc_warranty_desc">备机/备件优先置换，保障算力在线率。</p>
+        <div class="about-grid">
+          <article class="about-panel">
+            <div class="timeline">
+              <div class="timeline-item"><div class="timeline-year">2011</div><div><h3 data-i18n="timeline_one_title">Establishment</h3><p data-i18n="timeline_one_desc">Established in Shenzhen, MinersKing joined the crypto mining area and expanded the team continuously.</p></div></div>
+              <div class="timeline-item"><div class="timeline-year">2021</div><div><h3 data-i18n="timeline_two_title">Globalization</h3><p data-i18n="timeline_two_desc">MinersKing established the offices and warehouses in HongKong and Moscow.</p></div></div>
+              <div class="timeline-item"><div class="timeline-year">2023</div><div><h3 data-i18n="timeline_three_title">Expansion</h3><p data-i18n="timeline_three_desc">Team members expanded to 50+, and MinersKing actively participated in overseas events to grow brand awareness.</p></div></div>
+            </div>
+          </article>
+          <article class="highlight-panel">
+            <h3 data-i18n="highlight_title">A supplier built around integrated mining support.</h3>
+            <ul class="bullet-list">
+              <li data-i18n="highlight_one">Diverse miner choices including mining rigs, accessories, and kits from various brands.</li>
+              <li data-i18n="highlight_two">Fast delivery planning for quicker equipment deployment.</li>
+              <li data-i18n="highlight_three">After-sales and technical guidance to support long-term mining operations.</li>
+            </ul>
+            <button class="btn btn-primary" type="button" data-modal-trigger="contact" data-i18n="btn_custom_quote">Get a Custom Quote</button>
+          </article>
         </div>
       </div>
-    </div>
-  </section>
-
-  <section id="about">
-    <div class="container">
-      <h2 class="section-title" data-i18n="section_about">关于中原科技</h2>
-      <p data-i18n="about_para1">我们专注比特币矿机销售与托管运维，团队来自矿场、硬件与风控背景，交付高算力、低功耗设备。</p>
-      <p data-i18n="about_para2">使命：让算力获取更简单、更透明。支持中文/英文沟通，深圳现货，全球发货。</p>
-    </div>
-  </section>
-
-  <section id="contact">
-    <div class="container">
-      <h2 class="section-title" data-i18n="section_contact">联系我们</h2>
-      <div class="contact-info">
-        <p><strong data-i18n="label_phone">电话：</strong><a href="tel:+8613674067667">+8613674067667</a></p>
-        <p><strong data-i18n="label_email">邮箱：</strong><a href="mailto:1710915394@qq.com">1710915394@qq.com</a></p>
-        <p><strong data-i18n="label_contact">联系人：</strong>Jack</p>
-        <p style="margin-top:6px;"><button class="btn" type="button" id="contact-open-2" data-i18n="btn_contact">添加微信/WhatsApp</button></p>
+    </section>
+    <section id="solutions">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 data-i18n="solutions_title">Integrated Solutions</h2>
+            <p data-i18n="solutions_note">These three cards closely follow the live site headings and sales messaging.</p>
+          </div>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card"><div class="feature-icon">01</div><h3 data-i18n="feature_one_title">Integrated Solutions</h3><p data-i18n="feature_one_desc">As a partner to leading brands, MinersKing is committed to providing miners with diverse choices, including mining rigs, accessories and kits from various brands. Our goal is to offer customers comprehensive integrated mining solutions.</p></article>
+          <article class="feature-card"><div class="feature-icon">02</div><h3 data-i18n="feature_two_title">Fast Delivery</h3><p data-i18n="feature_two_desc">Experience the efficiency of our service with lightning-fast delivery times. We understand the importance of timely deployment to guarantee that your mining equipment reaches you promptly.</p></article>
+          <article class="feature-card"><div class="feature-icon">03</div><h3 data-i18n="feature_three_title">Technical Support</h3><p data-i18n="feature_three_desc">In addition to comprehensive pre-sales support, MinersKing emphasizes after-sales service. We track logistics and assist customers with product usage, ensuring a better mining journey with help from our technical specialists.</p></article>
+        </div>
       </div>
-      <form class="contact-form" action="https://formsubmit.co/1710915394@qq.com" method="POST">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" value="https://zhuangyuan-mining.vercel.app/#contact">
-        <input type="text" name="name" data-i18n-placeholder="ph_name" placeholder="您的姓名" required>
-        <input type="email" name="email" data-i18n-placeholder="ph_email" placeholder="电子邮箱" required>
-        <input type="tel" name="phone" data-i18n-placeholder="ph_phone" placeholder="联系电话" required>
-        <textarea name="message" rows="5" data-i18n-placeholder="ph_message" placeholder="留言内容" required></textarea>
-        <button type="submit" class="btn" data-i18n="btn_submit">提交</button>
-      </form>
-    </div>
-  </section>
-
+    </section>
+    <section id="catalog">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 data-i18n="catalog_title">Product Categories</h2>
+            <p data-i18n="catalog_note">This block turns the live navigation categories into upload-ready homepage entry cards.</p>
+          </div>
+        </div>
+        <div class="catalog-grid">
+          <article class="catalog-card"><span class="catalog-label">ASIC</span><h3>Antminer</h3><p data-i18n="cat_antminer">Mainstream BTC miners for multiple budget and performance levels.</p></article>
+          <article class="catalog-card"><span class="catalog-label">ASIC</span><h3>Whatsminer</h3><p data-i18n="cat_whatsminer">Whatsminer rigs suitable for farms, warehouses, and scalable deployments.</p></article>
+          <article class="catalog-card"><span class="catalog-label">ASIC</span><h3>IceRiver</h3><p data-i18n="cat_iceriver">Kaspa-oriented miners and related products for diversified buyers.</p></article>
+          <article class="catalog-card"><span class="catalog-label">ASIC</span><h3>GoldShell</h3><p data-i18n="cat_goldshell">Compact and specialized miners for targeted use cases.</p></article>
+          <article class="catalog-card"><span class="catalog-label">SOLUTION</span><h3>C SERIES</h3><p data-i18n="cat_cseries">For home mining layouts and smaller-scale deployment needs.</p></article>
+          <article class="catalog-card"><span class="catalog-label">SOLUTION</span><h3>B SERIES</h3><p data-i18n="cat_bseries">Scalable infrastructure for warehouse-style mining setups.</p></article>
+          <article class="catalog-card"><span class="catalog-label">SOLUTION</span><h3>M SERIES</h3><p data-i18n="cat_mseries">Designed for WhatsMiner M56 and M66 environments.</p></article>
+          <article class="catalog-card"><span class="catalog-label">SOLUTION</span><h3>BC SERIES</h3><p data-i18n="cat_bcseries">Immersive mining containers and supporting accessories.</p></article>
+        </div>
+      </div>
+    </section>
+    <section id="blogs">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 data-i18n="blogs_title">Company Blogs</h2>
+            <p data-i18n="blogs_note">The live homepage shows four blog items. This version preserves the same titles and visual rhythm for a high-fidelity front-end clone.</p>
+          </div>
+        </div>
+        <div class="blog-grid">
+          <article class="blog-card"><div class="blog-thumb">DOGE / LTC</div><div class="blog-body"><h3 data-i18n="blog_one_title">Top Scrypt Miners to Consider as Dogecoin Prices Soar</h3><p data-i18n="blog_one_desc">A practical overview of high-demand Scrypt miners that get attention when Dogecoin and Litecoin activity rises.</p></div></article>
+          <article class="blog-card"><div class="blog-thumb">EVENTS</div><div class="blog-body"><h3 data-i18n="blog_two_title">Key Insights from Blockchain Life 2024: MinersKing's Role in Advancing Mining Solutions</h3><p data-i18n="blog_two_desc">A short content block modeled after the current homepage blog card about MinersKing's event presence and mining solution positioning.</p></div></article>
+          <article class="blog-card"><div class="blog-thumb">GUIDE</div><div class="blog-body"><h3 data-i18n="blog_three_title">Cryptocurrency Mining Investment: Practical Tips to Avoid Common Mistakes</h3><p data-i18n="blog_three_desc">An educational article slot focused on investment mistakes, machine choices, and deployment planning.</p></div></article>
+          <article class="blog-card"><div class="blog-thumb">KASPA</div><div class="blog-body"><h3 data-i18n="blog_four_title">The Best Kaspa Miner for Earning Passive Income in 2024</h3><p data-i18n="blog_four_desc">A Kaspa-centered content card that mirrors the title and role of the current homepage version.</p></div></article>
+        </div>
+      </div>
+    </section>
+    <section id="partners">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 data-i18n="partners_title">Our Partners</h2>
+            <p data-i18n="partners_note">The original site shows partner logos here. This clone uses clean logo placeholders so you can later replace them with real graphics.</p>
+          </div>
+        </div>
+        <div class="partner-grid">
+          <div class="partner-card">BITMAIN</div><div class="partner-card">WHATSMINER</div><div class="partner-card">ICERIVER</div><div class="partner-card">GOLDSHELL</div><div class="partner-card">ELPHAPEX</div><div class="partner-card">BOMBAX</div><div class="partner-card">AVALON</div><div class="partner-card">JASMINER</div>
+        </div>
+      </div>
+    </section>
+    <section id="contact">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 data-i18n="contact_title">Contact Us</h2>
+            <p data-i18n="contact_note">Footer contact details, addresses, and support entry points are all preserved here to stay close to the live site.</p>
+          </div>
+        </div>
+        <div class="contact-grid">
+          <article class="contact-card">
+            <div><strong data-i18n="contact_addr1_title">China Office Address</strong><p data-i18n="contact_addr1">706,7/F,BlockA,Haisong Building, Futian District,Shenzhen</p></div>
+            <div><strong data-i18n="contact_addr2_title">Moscow Office Address</strong><p data-i18n="contact_addr2">Каширское шоссе, 3к2с12, 607</p></div>
+            <div><strong data-i18n="contact_email_title">Email</strong><a href="mailto:1710915394@qq.com">1710915394@qq.com</a></div>
+            <div style="display:flex; gap:12px; flex-wrap:wrap;">
+              <button class="btn btn-primary" type="button" data-modal-trigger="contact" data-i18n="btn_show_qr">Show QR</button>
+              <button class="btn btn-accent" type="button" data-modal-trigger="pay" data-i18n="btn_show_pay">Show Payment</button>
+            </div>
+          </article>
+          <article class="contact-card">
+            <form class="contact-form" action="https://formsubmit.co/1710915394@qq.com" method="POST">
+              <input type="hidden" name="_captcha" value="false">
+              <input type="hidden" name="_subject" value="MinersKing Inquiry">
+              <input type="text" name="name" placeholder="Your Name" data-i18n-placeholder="ph_name" required>
+              <input type="email" name="email" placeholder="Email" data-i18n-placeholder="ph_email" required>
+              <input type="tel" name="phone" placeholder="Phone / WhatsApp" data-i18n-placeholder="ph_phone" required>
+              <textarea name="message" rows="7" placeholder="Tell us what miners or solutions you need" data-i18n-placeholder="ph_message" required></textarea>
+              <button class="btn btn-primary" type="submit" data-i18n="btn_send">Send Message</button>
+            </form>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
   <footer>
     <div class="container">
-      <p>© 2026 中原科技</p>
+      <div class="footer-grid">
+        <article class="footer-card"><h3>MinersKing</h3><p data-i18n="footer_intro">A high-fidelity static homepage clone modeled after the current MinersKing site structure and content flow.</p></article>
+        <article class="footer-card"><h4 data-i18n="footer_products">Product Categories</h4><div class="footer-links"><a href="#catalog">Antminer</a><a href="#catalog">Whatsminer</a><a href="#catalog">IceRiver</a><a href="#solutions">MINING SOLUTION</a><a href="#catalog">Elphapex</a><a href="#catalog">Bombax</a><a href="#catalog">Avalon</a><a href="#catalog">JASMINER</a></div></article>
+        <article class="footer-card"><h4 data-i18n="footer_help">Help & Support</h4><div class="footer-links"><a href="#about" data-i18n="footer_about">About Us</a><a href="#contact">Fraud Prevention</a><a href="#contact">Privacy Policy</a><a href="#contact">Service Policy</a><a href="#contact">Shipping Policy</a><a href="#contact">Contact Us</a></div></article>
+        <article class="footer-card"><h4 data-i18n="footer_contact">Contact Us</h4><div class="footer-links"><a href="#contact">WhatsApp</a><a href="#contact">Telegram Channel</a><a href="mailto:1710915394@qq.com">Describe to Email</a><a href="#contact">Join Us</a></div></article>
+      </div>
+      <div class="footer-bottom"><span>Copyright © 2026 MinersKing All Rights Reserved.</span><span data-i18n="footer_langs">English / Russian / Spanish / Arabic / German / French / Italian</span></div>
     </div>
   </footer>
-
   <div class="modal-overlay" id="contact-modal">
     <div class="modal">
-      <div class="modal-header">
-        <div class="modal-title" data-i18n="contact_modal_title">联系二维码 / Contact QR</div>
-        <button class="modal-close" id="contact-close" aria-label="关闭">×</button>
-      </div>
-      <div class="pay-options">
-        <div class="pay-card">
-          <img class="pay-img" src="wechat-qr.jpg" alt="WeChat QR">
-          <h4 data-i18n="contact_wechat_title">微信</h4>
-          <p data-i18n="contact_wechat_desc">扫码添加微信咨询</p>
-        </div>
-        <div class="pay-card">
-          <img class="pay-img" src="whatsapp-qr.jpg" alt="WhatsApp QR">
-          <h4>WhatsApp</h4>
-          <p data-i18n="contact_whatsapp_desc">Scan to chat via WhatsApp</p>
-        </div>
+      <div class="modal-head"><h3 data-i18n="modal_contact_title">WeChat & WhatsApp</h3><button class="modal-close" type="button" data-close-modal="contact">×</button></div>
+      <div class="modal-grid">
+        <div class="modal-card"><img src="wechat-qr.jpg" alt="WeChat QR"><h4>WeChat</h4><p data-i18n="wechat_desc">Scan to contact MinersKing on WeChat.</p></div>
+        <div class="modal-card"><img src="whatsapp-qr.jpg" alt="WhatsApp QR"><h4>WhatsApp</h4><p data-i18n="whatsapp_desc">Scan to contact MinersKing on WhatsApp.</p></div>
       </div>
     </div>
   </div>
-
   <div class="modal-overlay" id="pay-modal">
     <div class="modal">
-      <div class="modal-header">
-        <div class="modal-title" data-i18n="pay_modal_title">请选择收款方式 / Select Payment</div>
-        <button class="modal-close" id="pay-close" aria-label="关闭">×</button>
-      </div>
-      <div class="pay-options">
-        <div class="pay-card">
-          <img class="pay-img" src="pay-trx.jpg" alt="USDT TRX">
-          <h4 data-i18n="pay_trx_title">USDT 充币 (TRX)</h4>
-          <p data-i18n="pay_trx_desc">地址: TNbfn9MinzULV5tgYMUegBivACxSeKNUTv</p>
-        </div>
-        <div class="pay-card">
-          <img class="pay-img" src="pay-bsc.jpg" alt="USDT BSC">
-          <h4 data-i18n="pay_bsc_title">USDT 充币 (BSC)</h4>
-          <p data-i18n="pay_bsc_desc">地址: 0x9ef3553baf12f6f28aedc6d72a66e6101447150b</p>
-        </div>
+      <div class="modal-head"><h3 data-i18n="modal_pay_title">Crypto Payment Details</h3><button class="modal-close" type="button" data-close-modal="pay">×</button></div>
+      <div class="modal-grid">
+        <div class="modal-card"><img src="pay-trx.jpg" alt="TRX QR"><h4>USDT (TRX)</h4><p>TNbfn9MinzULV5tgYMUegBivACxSeKNUTv</p></div>
+        <div class="modal-card"><img src="pay-bsc.jpg" alt="BSC QR"><h4>USDT (BSC)</h4><p>0x9ef3553baf12f6f28aedc6d72a66e6101447150b</p></div>
       </div>
     </div>
   </div>
-
+  <button class="float-contact" type="button" data-modal-trigger="contact">M</button>
   <script>
-    const products = [
-      { name: "蚂蚁 S21 200T", hashrate: "200 TH/s", price: "785 USDT" },
-      { name: "蚂蚁 T21 190T", hashrate: "190 TH/s", price: "529 USDT" },
-      { name: "蚂蚁 S19j Pro 104T", hashrate: "104 TH/s", price: "115 USDT" },
-      { name: "蚂蚁 S19 Pro+ Hydro 198T", hashrate: "198 TH/s", price: "338 USDT" }
-    ];
-
-    const priceData = [
-      { coin:"BTC", model:"NEW S21 151T", price:"$890", img:"https://res.cloudinary.com/dluwgr5op/image/upload/e_background_removal/e_trim/c_limit,w_1600/f_auto/q_85/m5vdij15uqkg0qxsxpro" },
-      { coin:"BTC", model:"NEW S21+ Hyd 319T", price:"$2250", img:"https://res.cloudinary.com/dluwgr5op/image/upload/e_background_removal/e_trim/c_limit,w_1600/f_auto/q_85/m5vdij15uqkg0qxsxpro" },
-      { coin:"BTC", model:"NEW S21+ Hyd 338T", price:"$2385", img:"https://res.cloudinary.com/dluwgr5op/image/upload/e_background_removal/e_trim/c_limit,w_1600/f_auto/q_85/m5vdij15uqkg0qxsxpro" },
-      { coin:"BTC", model:"NEW S21+ Hyd 358T", price:"$2570", img:"https://res.cloudinary.com/dluwgr5op/image/upload/e_background_removal/e_trim/c_limit,w_1600/f_auto/q_85/m5vdij15uqkg0qxsxpro" },
-      { coin:"BTC", model:"S21e hyd 288T", price:"$1480", img:"https://res.cloudinary.com/dluwgr5op/image/upload/e_background_removal/e_trim/c_limit,w_1600/f_auto/q_85/m5vdij15uqkg0qxsxpro" },
-      { coin:"BTC", model:"S21e hyd 310T", price:"$1550", img:"https://res.cloudinary.com/dluwgr5op/image/upload/e_background_removal/e_trim/c_limit,w_1600/f_auto/q_85/m5vdij15uqkg0qxsxpro" },
-      { coin:"BTC", model:"S21e hyd 332T", price:"$1691", img:"https://res.cloudinary.com/dluwgr5op/image/upload/e_background_removal/e_trim/c_limit,w_1600/f_auto/q_85/m5vdij15uqkg0qxsxpro" },
-      { coin:"BTC", model:"S21xp HYD 266T", price:"$810", img:"https://res.cloudinary.com/dluwgr5op/image/upload/e_background_removal/e_trim/c_limit,w_1600/f_auto/q_85/m5vdij15uqkg0qxsxpro" },
-      { coin:"BTC", model:"S21xp HYD 279T", price:"$1015", img:"https://res.cloudinary.com/dluwgr5op/image/upload/e_background_removal/e_trim/c_limit,w_1600/f_auto/q_85/m5vdij15uqkg0qxsxpro" },
-      { coin:"BTC", model:"S21XP+ HYD 293T", price:"$1120", img:"https://res.cloudinary.com/dluwgr5op/image/upload/e_background_removal/e_trim/c_limit,w_1600/f_auto/q_85/m5vdij15uqkg0qxsxpro" },
-      { coin:"LTC/DOGE", model:"New L7 9050m", price:"$1200", img:"https://i0.wp.com/www.gonbox.com/wp-content/uploads/2022/12/L7-1.jpg?fit=800%2C800&ssl=1" },
-      { coin:"LTC/DOGE", model:"Used L7 9050m", price:"$570", img:"https://i0.wp.com/www.gonbox.com/wp-content/uploads/2022/12/L7-1.jpg?fit=800%2C800&ssl=1" },
-      { coin:"LTC/DOGE", model:"Used L9 16G", price:"$2395", img:"https://i0.wp.com/www.gonbox.com/wp-content/uploads/2022/12/L7-1.jpg?fit=800%2C800&ssl=1" },
-      { coin:"LTC/DOGE", model:"New L9 16G", price:"$2720", img:"https://i0.wp.com/www.gonbox.com/wp-content/uploads/2022/12/L7-1.jpg?fit=800%2C800&ssl=1" },
-      { coin:"LTC/DOGE", model:"Used DG1+ 14G", price:"$1450", img:"https://i0.wp.com/www.gonbox.com/wp-content/uploads/2022/12/L7-1.jpg?fit=800%2C800&ssl=1" },
-      { coin:"BTC", model:"NEW S19kpro 120T", price:"$360", img:"https://res.cloudinary.com/dluwgr5op/image/upload/e_background_removal/e_trim/c_limit,w_1600/f_auto/q_85/llgc0ecuakdxdq4kvlm5" },
-      { coin:"BTC", model:"NEW S19kpro 115T", price:"$338", img:"https://res.cloudinary.com/dluwgr5op/image/upload/e_background_removal/e_trim/c_limit,w_1600/f_auto/q_85/llgc0ecuakdxdq4kvlm5" },
-      { coin:"BTC", model:"NEW S19kpro 110T", price:"$318", img:"https://res.cloudinary.com/dluwgr5op/image/upload/e_background_removal/e_trim/c_limit,w_1600/f_auto/q_85/llgc0ecuakdxdq4kvlm5" },
-      { coin:"BTC", model:"Used S21+ 235T", price:"$1450", img:"https://res.cloudinary.com/dluwgr5op/image/upload/e_background_removal/e_trim/c_limit,w_1600/f_auto/q_85/m5vdij15uqkg0qxsxpro" },
-      { coin:"BTC", model:"Used T21 190T", price:"$529", img:"https://res.cloudinary.com/dluwgr5op/image/upload/e_background_removal/e_trim/c_limit,w_1600/f_auto/q_85/hssgao4kk2jryzunhajj" },
-      { coin:"BTC", model:"Used S21 200T", price:"$785", img:"https://res.cloudinary.com/dluwgr5op/image/upload/e_background_removal/e_trim/c_limit,w_1600/f_auto/q_85/m5vdij15uqkg0qxsxpro" },
-      { coin:"BTC", model:"New S19 95T", price:"$175", img:"https://res.cloudinary.com/dluwgr5op/image/upload/e_background_removal/e_trim/c_limit,w_1600/f_auto/q_85/llgc0ecuakdxdq4kvlm5" },
-      { coin:"BTC", model:"New S19jpro 104T", price:"$198", img:"https://res.cloudinary.com/dluwgr5op/image/upload/e_background_removal/e_trim/c_limit,w_1600/f_auto/q_85/llgc0ecuakdxdq4kvlm5" },
-      { coin:"BTC", model:"New S19PRO 110T", price:"$210", img:"https://res.cloudinary.com/dluwgr5op/image/upload/e_background_removal/e_trim/c_limit,w_1600/f_auto/q_85/llgc0ecuakdxdq4kvlm5" },
-      { coin:"BTC", model:"Used S19Kpro 120T", price:"$220", img:"https://res.cloudinary.com/dluwgr5op/image/upload/e_background_removal/e_trim/c_limit,w_1600/f_auto/q_85/llgc0ecuakdxdq4kvlm5" },
-      { coin:"BTC", model:"Used S19 95T", price:"$95", img:"https://res.cloudinary.com/dluwgr5op/image/upload/e_background_removal/e_trim/c_limit,w_1600/f_auto/q_85/llgc0ecuakdxdq4kvlm5" },
-      { coin:"BTC", model:"Used S19jpro 104T", price:"$115", img:"https://res.cloudinary.com/dluwgr5op/image/upload/e_background_removal/e_trim/c_limit,w_1600/f_auto/q_85/llgc0ecuakdxdq4kvlm5" },
-      { coin:"BTC", model:"Used S19pro 110T", price:"$140", img:"https://res.cloudinary.com/dluwgr5op/image/upload/e_background_removal/e_trim/c_limit,w_1600/f_auto/q_85/llgc0ecuakdxdq4kvlm5" },
-      { coin:"BTC", model:"Used S19Jxp 143T", price:"$360", img:"https://res.cloudinary.com/dluwgr5op/image/upload/e_background_removal/e_trim/c_limit,w_1600/f_auto/q_85/llgc0ecuakdxdq4kvlm5" },
-      { coin:"BTC", model:"Used S19exp hydro 251T", price:"$598", img:"https://res.cloudinary.com/dluwgr5op/image/upload/e_background_removal/e_trim/c_limit,w_1600/f_auto/q_85/m5vdij15uqkg0qxsxpro" },
-      { coin:"BTC", model:"Used S19pro+Hyd 198T", price:"$338", img:"https://res.cloudinary.com/dluwgr5op/image/upload/e_background_removal/e_trim/c_limit,w_1600/f_auto/q_85/llgc0ecuakdxdq4kvlm5" },
-      { coin:"BTC", model:"Used S19pro+Hyd 184T", price:"$295", img:"https://res.cloudinary.com/dluwgr5op/image/upload/e_background_removal/e_trim/c_limit,w_1600/f_auto/q_85/llgc0ecuakdxdq4kvlm5" },
-      { coin:"BTC", model:"Used S19pro Hyd 158T", price:"$248", img:"https://res.cloudinary.com/dluwgr5op/image/upload/e_background_removal/e_trim/c_limit,w_1600/f_auto/q_85/llgc0ecuakdxdq4kvlm5" },
-      { coin:"BTC", model:"Used S19pro Hyd 151.5T", price:"$220", img:"https://res.cloudinary.com/dluwgr5op/image/upload/e_background_removal/e_trim/c_limit,w_1600/f_auto/q_85/llgc0ecuakdxdq4kvlm5" },
-      { coin:"BTC", model:"Used S19 Hyd 147T", price:"$175", img:"https://res.cloudinary.com/dluwgr5op/image/upload/e_background_removal/e_trim/c_limit,w_1600/f_auto/q_85/llgc0ecuakdxdq4kvlm5" },
-      { coin:"BTC", model:"Used S19xp 141T", price:"$345", img:"https://res.cloudinary.com/dluwgr5op/image/upload/e_background_removal/e_trim/c_limit,w_1600/f_auto/q_85/llgc0ecuakdxdq4kvlm5" }
-    ];
-
-    // 手动打开支付弹窗的兜底函数
-    function openPay(){
-      const modal = document.getElementById('pay-modal');
-      if(modal){ modal.classList.add('active'); }
-    }
-
     const translations = {
-      zh: {
-        nav_home:"首页",nav_products:"矿机产品",nav_prices:"价格表",nav_hosting:"托管",nav_services:"服务",nav_about:"关于",nav_contact:"联系",
-        hero_badge:"比特币矿机一站式｜现货+托管",home_title:"专业比特币矿机解决方案",home_desc:"S19/S21/T21 等主流机型现货，提供选型、上架、托管与 7x24 运维，交付更快、更稳定。",
-        btn_view_prices:"查看现货价格",btn_contact:"立即咨询",btn_buy:"立即购买",btn_submit:"提交",
-        section_products:"热门矿机",products_note:"精选高算力、高性价比机型，深圳现货可自提/快递。",
-        section_prices:"现货价格表 / Price List",price_note:"价格随市场波动，以最终确认单为准；发货地深圳，可代订国际快递/空运/海运。",
-        th_model:"型号",th_price:"价格",
-        section_hosting:"矿机托管",hosting_desc:"10-500 台托管，一条龙：上架调试、电力对接、实时运维监控，透明结算。",
-        hosting_power:"电价 0.055–0.07/kWh",hosting_power_title:"电力与上架",hosting_power_desc:"协助谈判电价，24-72 小时完成上架与算力验证，缩短停机期。",
-        hosting_ops:"7x24 监控",hosting_ops_title:"运维监控",hosting_ops_desc:"算力/温度/掉板实时告警，自动派单；支持周报与巡检留痕。",
-        hosting_security:"安全透明",hosting_security_title:"安全与追踪",hosting_security_desc:"机房安防+视频抽检，资产编号可追踪；支持单机/混托。",
-        section_services:"我们的服务",svc_install:"专业安装",svc_install_desc:"工程师上门/远程部署，按机型优化风道与功率。",
-        svc_monitor:"运维监控",svc_monitor_desc:"7×24 实时监控，异常秒级提醒，缩短宕机时间。",
-        svc_support:"技术支持",svc_support_desc:"固件升级、算力优化、掉板/过温排查全流程支撑。",
-        svc_warranty:"售后保障",svc_warranty_desc:"备机/备件优先置换，保障算力在线率。",
-        section_about:"关于中原科技",about_para1:"我们专注比特币矿机销售与托管运维，团队来自矿场、硬件与风控背景，交付高算力、低功耗设备。",
-        about_para2:"使命：让算力获取更简单、更透明。支持中文/英文沟通，深圳现货，全球发货。",
-        section_contact:"联系我们",label_phone:"电话：",label_email:"邮箱：",label_contact:"联系人：",
-        ph_name:"您的姓名",ph_email:"电子邮箱",ph_phone:"联系电话",ph_message:"留言内容",
-        contact_modal_title:"联系二维码 / Contact QR",contact_wechat_title:"微信",contact_wechat_desc:"扫码添加微信咨询",contact_whatsapp_desc:"Scan to chat via WhatsApp",
-        pay_modal_title:"请选择收款方式 / Select Payment",pay_trx_title:"USDT 充币 (TRX)",pay_trx_desc:"地址: TNbfn9MinzULV5tgYMUegBivACxSeKNUTv",pay_bsc_title:"USDT 充币 (BSC)",pay_bsc_desc:"地址: 0x9ef3553baf12f6f28aedc6d72a66e6101447150b"
-      },
       en: {
-        nav_home:"Home",nav_products:"Miners",nav_prices:"Pricing",nav_hosting:"Hosting",nav_services:"Services",nav_about:"About",nav_contact:"Contact",
-        hero_badge:"One-stop miners | Stock + Hosting",home_title:"Pro Bitcoin Mining Solutions",home_desc:"Stock of S19/S21/T21 with selection, racking, hosting and 24/7 ops for faster, steadier delivery.",
-        btn_view_prices:"See price list",btn_contact:"Talk to us",btn_buy:"Contact sales",btn_submit:"Send",
-        section_products:"Hot Miners",products_note:"Curated high-efficiency rigs in Shenzhen. Pick up or worldwide shipping.",
-        section_prices:"Spot Price List",price_note:"Prices move with market; final quotation prevails. Ship from Shenzhen via courier/air/sea.",
-        th_model:"Model",th_price:"Price",
-        section_hosting:"Hosting",hosting_desc:"10-500 units turnkey: racking, power hookup, live monitoring, transparent settlement.",
-        hosting_power:"Power 0.055–0.07/kWh",hosting_power_title:"Power & Racking",hosting_power_desc:"Negotiate power, rack within 24-72h and validate hashrate to cut downtime.",
-        hosting_ops:"24/7 Monitoring",hosting_ops_title:"Ops Monitoring",hosting_ops_desc:"Realtime hashrate/thermal alerts with auto dispatch; weekly reports and audit trail.",
-        hosting_security:"Secure & Transparent",hosting_security_title:"Security & Traceability",hosting_security_desc:"Site security + spot video checks; asset IDs traceable; single or mixed hosting supported.",
-        section_services:"Our Services",svc_install:"Installation",svc_install_desc:"On-site/remote deployment tuned for airflow and power per model.",
-        svc_monitor:"Ops Monitoring",svc_monitor_desc:"24/7 monitoring with instant alerts to reduce downtime.",
-        svc_support:"Tech Support",svc_support_desc:"Firmware upgrades, hashrate tuning, board/thermal troubleshooting end-to-end.",
-        svc_warranty:"After-sales",svc_warranty_desc:"Spare units/parts priority swap to keep uptime high.",
-        section_about:"About Zhongyuan Tech",about_para1:"We focus on BTC miner sales and hosting. Team spans farms, hardware, and risk control to deliver efficient rigs.",
-        about_para2:"Mission: make hashrate simpler and transparent. Chinese/English support. Shenzhen stock, global delivery.",
-        section_contact:"Contact Us",label_phone:"Phone: ",label_email:"Email: ",label_contact:"Contact: ",
-        ph_name:"Your name",ph_email:"Email",ph_phone:"Phone",ph_message:"Message",
-        contact_modal_title:"Contact QR",contact_wechat_title:"WeChat",contact_wechat_desc:"Scan to add on WeChat",contact_whatsapp_desc:"Scan to chat via WhatsApp",
-        pay_modal_title:"Choose Payment",pay_trx_title:"USDT Top-up (TRX)",pay_trx_desc:"Address: TNbfn9MinzULV5tgYMUegBivACxSeKNUTv",pay_bsc_title:"USDT Top-up (BSC)",pay_bsc_desc:"Address: 0x9ef3553baf12f6f28aedc6d72a66e6101447150b"
+        top_location: 'Our Location: 304 North Cardinal St. Dorchester Center, MA 02124', brand_sub: 'ASIC Mining Supplier', nav_home: 'Home', nav_asic: 'ASIC', nav_solution: 'MINING SOLUTION', nav_blog: 'Blog', nav_about: 'About Us', nav_contact: 'Contact', tool_search: 'Search', tool_cart: 'Cart $0.00', btn_quote: 'Get Quote', hero_badge: 'Global ASIC supply and mining solution service', hero_title: 'Integrated mining solutions for global ASIC buyers.', hero_desc: 'MinersKing is committed to providing miners, accessories, and scalable mining solutions, backed by fast delivery and technical support before and after the sale.', btn_products: 'Explore Products', btn_about: 'Learn More', hero_stat_one: 'Established in Shenzhen', hero_stat_two: 'Expanded team and overseas presence', hero_stat_three: 'Pre-sales and after-sales follow-up', side_title_one: 'Hot-selling ASIC categories', side_desc_one: 'Antminer, Whatsminer, GoldShell, Elphapex, Bombax, IceRiver, Avalon, JASMINER and graphics card products.', side_title_two: 'Fast delivery and support', side_desc_two: 'We track logistics and assist customers with product usage, helping miners enjoy a quicker and smoother deployment journey.', btn_payment: 'Payment Info', btn_contact_modal: 'Contact Us', about_title: 'About MinersKing', about_note: 'This section follows the live site structure: a short timeline on the left and a commercial value summary on the right.', about_cta: 'Learn More', timeline_one_title: 'Establishment', timeline_one_desc: 'Established in Shenzhen, MinersKing joined the crypto mining area and expanded the team continuously.', timeline_two_title: 'Globalization', timeline_two_desc: 'MinersKing established the offices and warehouses in HongKong and Moscow.', timeline_three_title: 'Expansion', timeline_three_desc: 'Team members expanded to 50+, and MinersKing actively participated in overseas events to grow brand awareness.', highlight_title: 'A supplier built around integrated mining support.', highlight_one: 'Diverse miner choices including mining rigs, accessories, and kits from various brands.', highlight_two: 'Fast delivery planning for quicker equipment deployment.', highlight_three: 'After-sales and technical guidance to support long-term mining operations.', btn_custom_quote: 'Get a Custom Quote', solutions_title: 'Integrated Solutions', solutions_note: 'These three cards closely follow the live site headings and sales messaging.', feature_one_title: 'Integrated Solutions', feature_one_desc: 'As a partner to leading brands, MinersKing is committed to providing miners with diverse choices, including mining rigs, accessories and kits from various brands. Our goal is to offer customers comprehensive integrated mining solutions.', feature_two_title: 'Fast Delivery', feature_two_desc: 'Experience the efficiency of our service with lightning-fast delivery times. We understand the importance of timely deployment to guarantee that your mining equipment reaches you promptly.', feature_three_title: 'Technical Support', feature_three_desc: 'In addition to comprehensive pre-sales support, MinersKing emphasizes after-sales service. We track logistics and assist customers with product usage, ensuring a better mining journey with help from our technical specialists.', catalog_title: 'Product Categories', catalog_note: 'This block turns the live navigation categories into upload-ready homepage entry cards.', cat_antminer: 'Mainstream BTC miners for multiple budget and performance levels.', cat_whatsminer: 'Whatsminer rigs suitable for farms, warehouses, and scalable deployments.', cat_iceriver: 'Kaspa-oriented miners and related products for diversified buyers.', cat_goldshell: 'Compact and specialized miners for targeted use cases.', cat_cseries: 'For home mining layouts and smaller-scale deployment needs.', cat_bseries: 'Scalable infrastructure for warehouse-style mining setups.', cat_mseries: 'Designed for WhatsMiner M56 and M66 environments.', cat_bcseries: 'Immersive mining containers and supporting accessories.', blogs_title: 'Company Blogs', blogs_note: 'The live homepage shows four blog items. This version preserves the same titles and visual rhythm for a high-fidelity front-end clone.', blog_one_title: 'Top Scrypt Miners to Consider as Dogecoin Prices Soar', blog_one_desc: 'A practical overview of high-demand Scrypt miners that get attention when Dogecoin and Litecoin activity rises.', blog_two_title: "Key Insights from Blockchain Life 2024: MinersKing's Role in Advancing Mining Solutions", blog_two_desc: 'A short content block modeled after the current homepage blog card about MinersKing\'s event presence and mining solution positioning.', blog_three_title: 'Cryptocurrency Mining Investment: Practical Tips to Avoid Common Mistakes', blog_three_desc: 'An educational article slot focused on investment mistakes, machine choices, and deployment planning.', blog_four_title: 'The Best Kaspa Miner for Earning Passive Income in 2024', blog_four_desc: 'A Kaspa-centered content card that mirrors the title and role of the current homepage version.', partners_title: 'Our Partners', partners_note: 'The original site shows partner logos here. This clone uses clean logo placeholders so you can later replace them with real graphics.', contact_title: 'Contact Us', contact_note: 'Footer contact details, addresses, and support entry points are all preserved here to stay close to the live site.', contact_addr1_title: 'China Office Address', contact_addr1: '706,7/F,BlockA,Haisong Building, Futian District,Shenzhen', contact_addr2_title: 'Moscow Office Address', contact_addr2: 'Каширское шоссе, 3к2с12, 607', contact_email_title: 'Email', btn_show_qr: 'Show QR', btn_show_pay: 'Show Payment', btn_send: 'Send Message', footer_intro: 'A high-fidelity static homepage clone modeled after the current MinersKing site structure and content flow.', footer_products: 'Product Categories', footer_help: 'Help & Support', footer_about: 'About Us', footer_contact: 'Contact Us', footer_langs: 'English / Russian / Spanish / Arabic / German / French / Italian', modal_contact_title: 'WeChat & WhatsApp', modal_pay_title: 'Crypto Payment Details', wechat_desc: 'Scan to contact MinersKing on WeChat.', whatsapp_desc: 'Scan to contact MinersKing on WhatsApp.', ph_name: 'Your Name', ph_email: 'Email', ph_phone: 'Phone / WhatsApp', ph_message: 'Tell us what miners or solutions you need'
+      },
+      zh: {
+        top_location: '我们的位置：304 North Cardinal St. Dorchester Center, MA 02124', brand_sub: '矿机设备供应商', nav_home: '首页', nav_asic: '矿机', nav_solution: '矿业方案', nav_blog: '博客', nav_about: '关于我们', nav_contact: '联系', tool_search: '搜索', tool_cart: '购物车 $0.00', btn_quote: '立即询价', hero_badge: '全球 ASIC 供应与矿业方案服务', hero_title: '面向全球 ASIC 买家的综合矿业解决方案。', hero_desc: 'MinersKing 致力于提供矿机、配件与可扩展矿业方案，并提供快速交付以及售前售后的技术支持。', btn_products: '查看产品', btn_about: '了解更多', hero_stat_one: '深圳成立', hero_stat_two: '团队扩张与海外布局', hero_stat_three: '售前售后持续跟进', side_title_one: '热门 ASIC 分类', side_desc_one: '覆盖 Antminer、Whatsminer、GoldShell、Elphapex、Bombax、IceRiver、Avalon、JASMINER 以及显卡产品。', side_title_two: '快速交付与支持', side_desc_two: '我们持续跟踪物流并协助客户使用产品，帮助矿工更快、更顺利地完成部署。', btn_payment: '付款信息', btn_contact_modal: '联系我们', about_title: '关于 MinersKing', about_note: '这一段保持线上站的结构感：左侧时间线，右侧商业价值概述。', about_cta: '了解更多', timeline_one_title: '成立', timeline_one_desc: 'MinersKing 于深圳成立，进入加密矿业领域，并持续扩展团队。', timeline_two_title: '全球化', timeline_two_desc: 'MinersKing 在香港和莫斯科建立了办公室和仓库。', timeline_three_title: '扩张', timeline_three_desc: '团队扩展到 50+ 人，并积极参与海外活动，提升品牌认知。', highlight_title: '围绕综合矿业支持打造的供应团队。', highlight_one: '提供来自多个品牌的矿机、配件和套件等多样化选择。', highlight_two: '通过更快的交付规划帮助设备尽早部署。', highlight_three: '提供售后与技术指导，支持长期矿业运营。', btn_custom_quote: '获取定制报价', solutions_title: '综合解决方案', solutions_note: '这三张卡片尽量贴近线上站的标题和销售表达。', feature_one_title: '综合解决方案', feature_one_desc: '作为领先品牌的合作伙伴，MinersKing 致力于为矿工提供多样化选择，包括多品牌矿机、配件和套件，目标是为客户提供全面的综合矿业解决方案。', feature_two_title: '快速交付', feature_two_desc: '体验我们服务的高效率。我们理解及时部署的重要性，确保你的矿机设备可以尽快送达。', feature_three_title: '技术支持', feature_three_desc: '除了完善的售前支持，MinersKing 也重视售后服务。我们跟踪物流并协助客户使用产品，技术专家帮助你更快进入矿业状态。', catalog_title: '产品分类', catalog_note: '这一组把线上导航中的分类转成了更适合首页上传展示的入口卡片。', cat_antminer: '适合不同预算和性能目标的主流 BTC 矿机。', cat_whatsminer: '适合矿场、仓储和扩容部署的 Whatsminer 机型。', cat_iceriver: '适合多元化买家的 Kaspa 系列矿机与相关产品。', cat_goldshell: '适用于特定场景的小型专业矿机。', cat_cseries: '适合家庭矿业布局与小规模部署。', cat_bseries: '适用于仓储型矿业扩展方案。', cat_mseries: '面向 WhatsMiner M56 和 M66 环境设计。', cat_bcseries: '浸没式矿柜与相关配套。', blogs_title: '公司博客', blogs_note: '线上首页展示了四篇博客，这一版保留了相同标题与节奏，更接近高仿前端效果。', blog_one_title: '随着狗狗币价格上涨值得考虑的 Scrypt 热门矿机', blog_one_desc: '概述在狗狗币与莱特币活跃时更受关注的 Scrypt 矿机。', blog_two_title: 'Blockchain Life 2024 关键洞察：MinersKing 如何推进矿业解决方案', blog_two_desc: '模拟线上博客卡片，强调 MinersKing 在活动中的露出和矿业方案定位。', blog_three_title: '加密矿业投资：避免常见错误的实用建议', blog_three_desc: '一篇围绕投资误区、设备选择和部署规划的内容卡片。', blog_four_title: '2024 年适合被动收益的最佳 Kaspa 矿机', blog_four_desc: '一张与线上首页作用接近的 Kaspa 内容卡片。', partners_title: '合作伙伴', partners_note: '原网站这里是合作 Logo，这一版先用品牌占位块，后续你可以替换成真实图标。', contact_title: '联系我们', contact_note: '页脚里的联系信息、地址和支持入口都保留到了这里，更接近线上站的感觉。', contact_addr1_title: '中国办公室地址', contact_addr1: '深圳市福田区海松大厦 A 座 7 楼 706', contact_addr2_title: '莫斯科办公室地址', contact_addr2: 'Каширское шоссе, 3к2с12, 607', contact_email_title: '邮箱', btn_show_qr: '查看二维码', btn_show_pay: '查看收款', btn_send: '发送消息', footer_intro: '这是一个按当前 MinersKing 网站结构和内容流高仿制作的静态首页。', footer_products: '产品分类', footer_help: '帮助与支持', footer_about: '关于我们', footer_contact: '联系我们', footer_langs: '英文 / 俄文 / 西班牙文 / 阿拉伯文 / 德文 / 法文 / 意大利文', modal_contact_title: '微信与 WhatsApp', modal_pay_title: '加密货币收款信息', wechat_desc: '扫码通过微信联系 MinersKing。', whatsapp_desc: '扫码通过 WhatsApp 联系 MinersKing。', ph_name: '你的姓名', ph_email: '邮箱', ph_phone: '电话 / WhatsApp', ph_message: '告诉我们你需要哪些矿机或方案'
       }
     };
-
-    function renderProducts(){
-      const wrap=document.getElementById('product-grid');
-      wrap.innerHTML='';
-      products.forEach(item=>{
-        const card=document.createElement('div');
-        card.className='card product-card';
-        card.innerHTML=`<h3>${item.name}</h3><p class="hashrate">${item.hashrate}</p><p class="price">${item.price}</p>`;
-        const btn=document.createElement('button');
-        btn.className='btn pay-trigger';
-        btn.setAttribute('data-i18n','btn_buy');
-        btn.textContent='立即购买';
-        btn.onclick = openPay;
-        card.appendChild(btn);
-        wrap.appendChild(card);
-      });
+    function applyLang(lang) {
+      const dict = translations[lang] || translations.en;
+      document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+      document.querySelectorAll('[data-i18n]').forEach((node) => { const key = node.dataset.i18n; if (dict[key]) node.textContent = dict[key]; });
+      document.querySelectorAll('[data-i18n-placeholder]').forEach((node) => { const key = node.dataset.i18nPlaceholder; if (dict[key]) node.placeholder = dict[key]; });
+      document.querySelectorAll('.lang-btn').forEach((btn) => btn.classList.toggle('active', btn.dataset.lang === lang));
+      localStorage.setItem('minersking-clone-lang', lang);
     }
-
-    function renderPrices(){
-      const wrap=document.getElementById('price-table');
-      wrap.innerHTML='';
-      priceData.forEach(item=>{
-        const row=document.createElement('div');
-        row.className='row';
-        row.innerHTML=`<div>${item.coin}</div><div><img class="price-img" src="${item.img}" alt="${item.model}">${item.model}</div><div>${item.price}</div>`;
-        const btn=document.createElement('button');
-        btn.className='btn pay-trigger';
-        btn.setAttribute('data-i18n','btn_buy');
-        btn.textContent='立即购买';
-        btn.onclick = openPay;
-        row.appendChild(btn);
-        wrap.appendChild(row);
-      });
+    function toggleModal(id, open) { const modal = document.getElementById(id + '-modal'); if (!modal) return; modal.classList.toggle('active', open); }
+    function bindUi() {
+      document.querySelectorAll('[data-lang]').forEach((btn) => btn.addEventListener('click', () => applyLang(btn.dataset.lang)));
+      document.querySelectorAll('[data-modal-trigger]').forEach((btn) => btn.addEventListener('click', () => toggleModal(btn.dataset.modalTrigger, true)));
+      document.querySelectorAll('[data-close-modal]').forEach((btn) => btn.addEventListener('click', () => toggleModal(btn.dataset.closeModal, false)));
+      document.querySelectorAll('.modal-overlay').forEach((modal) => modal.addEventListener('click', (event) => { if (event.target === modal) modal.classList.remove('active'); }));
+      window.addEventListener('keydown', (event) => { if (event.key === 'Escape') { toggleModal('contact', false); toggleModal('pay', false); } });
+      applyLang(localStorage.getItem('minersking-clone-lang') || 'en');
     }
-
-    function applyLang(lang){
-      const dict=translations[lang] || translations.zh;
-      document.documentElement.lang = lang==='en' ? 'en' : 'zh-CN';
-      document.querySelectorAll('[data-i18n]').forEach(el=>{
-        const key=el.dataset.i18n;
-        if(dict[key]) el.textContent=dict[key];
-      });
-      document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
-        const key=el.dataset.i18nPlaceholder;
-        if(dict[key]) el.placeholder=dict[key];
-      });
-      document.querySelectorAll('.lang-btn').forEach(btn=>{
-        btn.classList.toggle('active', btn.dataset.lang===lang);
-      });
-      // update CTA buttons text
-      document.querySelectorAll('[data-i18n="btn_buy"]').forEach(btn=>btn.textContent=dict.btn_buy || btn.textContent);
-      document.querySelectorAll('[data-i18n="btn_contact"]').forEach(btn=>btn.textContent=dict.btn_contact || btn.textContent);
-      document.querySelectorAll('[data-i18n="btn_view_prices"]').forEach(btn=>btn.textContent=dict.btn_view_prices || btn.textContent);
-      document.querySelectorAll('[data-i18n="btn_submit"]').forEach(btn=>btn.textContent=dict.btn_submit || btn.textContent);
-      localStorage.setItem('lang', lang);
-    }
-
-    function bindModals(){
-      const payModal=document.getElementById('pay-modal');
-      const contactModal=document.getElementById('contact-modal');
-      const payClose=document.getElementById('pay-close');
-      const contactClose=document.getElementById('contact-close');
-      const contactBtns=[document.getElementById('contact-open'), document.getElementById('contact-open-2')].filter(Boolean);
-
-      document.addEventListener('click',e=>{
-        if(e.target.classList.contains('pay-trigger')) payModal.classList.add('active');
-      });
-      payClose?.addEventListener('click',()=>payModal.classList.remove('active'));
-      payModal?.addEventListener('click',e=>{ if(e.target===payModal) payModal.classList.remove('active'); });
-
-      contactBtns.forEach(btn=>btn.addEventListener('click',()=>contactModal.classList.add('active')));
-      contactClose?.addEventListener('click',()=>contactModal.classList.remove('active'));
-      contactModal?.addEventListener('click',e=>{ if(e.target===contactModal) contactModal.classList.remove('active'); });
-      window.addEventListener('keydown',e=>{
-        if(e.key==='Escape'){ payModal?.classList.remove('active'); contactModal?.classList.remove('active'); }
-      });
-    }
-
-    function bindLang(){
-      document.querySelectorAll('.lang-btn').forEach(btn=>{
-        btn.addEventListener('click',()=>applyLang(btn.dataset.lang));
-      });
-      if(!localStorage.getItem('lang')) localStorage.setItem('lang','zh');
-      applyLang(localStorage.getItem('lang') || 'zh');
-    }
-
-    function init(){
-      renderProducts();
-      renderPrices();
-      bindModals();
-      bindLang();
-      // sticky header opacity tweak on scroll
-      window.addEventListener('scroll',()=>{
-        const header=document.querySelector('header');
-        header.style.background = window.scrollY>80 ? 'rgba(11,18,32,0.9)' : 'rgba(11,18,32,0.95)';
-      });
-    }
-
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', bindUi);
   </script>
-
-  <script>
-    // 兜底事件：确保热门矿机与价格表按钮点击必弹支付弹窗
-    (() => {
-      const openPay = () => {
-        const m = document.getElementById('pay-modal');
-        if (m) m.classList.add('active');
-      };
-      document.getElementById('product-grid')?.addEventListener('click', e => {
-        if (e.target.closest('button')) {
-          e.preventDefault();
-          openPay();
-        }
-      });
-      document.getElementById('price-table')?.addEventListener('click', e => {
-        if (e.target.closest('button')) {
-          e.preventDefault();
-          openPay();
-        }
-      });
-    })();
-  </script>
-
-  <button class="contact-button" aria-label="Contact us" onclick="document.getElementById('contact-modal')?.classList.add('active');">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16a1 1 0 0 1 1 1v11.5a1.5 1.5 0 0 1-1.5 1.5H7l-3.5 2.5V5a1 1 0 0 1 1-1Z"/></svg>
-    </button>
-  </div>
-
-
-
-  <!-- 联系方式垂直浮窗 -->
-  <style>
-    .contact-stack{position:fixed;right:18px;bottom:120px;z-index:1300;display:flex;flex-direction:column;align-items:center;gap:12px}
-    .contact-item{position:relative}
-    .contact-btn{width:64px;height:64px;border-radius:50%;border:none;display:grid;place-items:center;cursor:pointer;box-shadow:0 10px 26px rgba(0,0,0,.25);transition:transform .18s,box-shadow .18s}
-    .contact-btn:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(0,0,0,.28)}
-    .contact-tooltip{position:absolute;right:76px;top:50%;transform:translateY(-50%) translateX(6px);background:#fff;color:#111827;padding:7px 10px;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.18);font-size:13px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s,transform .15s}
-    .contact-item:hover .contact-tooltip{opacity:1;transform:translateY(-50%) translateX(0)}
-    .contact-btn svg{width:28px;height:28px;fill:#fff}
-  </style>
-  <div class="contact-stack">
-    <div class="contact-item">
-      <button class="contact-btn" style="background:#1abc5b" aria-label="Phone" onclick="location.href='tel:+8613674067667'">
-        <svg viewBox="0 0 24 24"><path d="M6.6 2.2 8.8 2a1 1 0 0 1 1.05.73l.9 3.6a1 1 0 0 1-.29.97l-1.7 1.6a12.3 12.3 0 0 0 5.3 5.3l1.6-1.7a1 1 0 0 1 .97-.28l3.6.9a1 1 0 0 1 .73 1.05l-.2 2.2a1.8 1.8 0 0 1-1.6 1.6c-2.5.24-7.4-.52-11.3-4.4C5 9.7 4.2 4.9 4.4 2.4a1.8 1.8 0 0 1 1.6-1.6Z"/></svg>
-      </button>
-      <div class="contact-tooltip">Phone</div>
-    </div>
-    <div class="contact-item">
-      <button class="contact-btn" style="background:#25D366" aria-label="WhatsApp" onclick="location.href='https://wa.me/message/TJNIKRDWZN3IG1'">
-        <svg viewBox="0 0 32 32"><path d="M16 6a9 9 0 0 0-7.59 13.77L7.5 26l6.41-.9A9 9 0 1 0 16 6Zm0-2a11 11 0 0 1 9.53 16.53l1 5.6-5.52-1A11 11 0 1 1 16 4Z"/><path d="M21.66 18.63c-.3-.15-1.78-.88-2.05-.98-.27-.1-.47-.15-.67.15-.2.3-.77.98-.94 1.18-.17.2-.35.23-.65.08-.3-.15-1.26-.46-2.4-1.45-.89-.79-1.5-1.77-1.67-2.07-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.38-.03-.53-.08-.15-.67-1.62-.92-2.22-.24-.57-.48-.5-.67-.5l-.57-.01c-.2 0-.52.08-.8.38-.27.3-1.05 1.03-1.05 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.1 3.2 5.08 4.5.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.78-.73 2.03-1.44.25-.7.25-1.3.18-1.44-.07-.14-.27-.22-.57-.37Z"/></svg>
-      </button>
-      <div class="contact-tooltip">WhatsApp</div>
-    </div>
-    <div class="contact-item">
-      <button class="contact-btn" style="background:#3fa9f5" aria-label="Telegram" onclick="location.href='https://t.me/Minerasi'">
-        <svg viewBox="0 0 24 24"><path d="M9.5 14.3 9.2 18a.7.7 0 0 0 .6-.3l1.6-1.5 3.3 2.4c.6.3 1 .1 1.1-.6l2-10c.2-.8-.3-1.1-.9-.9L4 11.3c-.8.2-.8.8-.1 1l3.6 1.1 8.4-5.4c.4-.2.7-.1.4.1"/></svg>
-      </button>
-      <div class="contact-tooltip">Telegram</div>
-    </div>
-    <div class="contact-item">
-      <button class="contact-btn" style="background:#07c160" aria-label="WeChat" onclick="document.getElementById('contact-modal')?.classList.add('active');">
-        <svg viewBox="0 0 24 24"><path d="M7.5 6.5A3.5 3.5 0 0 1 11 10c0 .5-.1 1-.3 1.4l1.2.6a4.5 4.5 0 1 1 2.6 1.5l-1.2.8-.2.2a.6.6 0 0 1-.8-.1l-.6-.8-1.3.8a.6.6 0 0 1-.9-.2l-.3-.9A4.5 4.5 0 1 1 7.5 6.5Zm-1 0A.8.8 0 1 0 7.3 7a.8.8 0 0 0-1 0Zm4 0a.8.8 0 1 0 .8.7.8.8 0 0 0-.8-.7Zm3.8 3a.8.8 0 1 0 .8.7.8.8 0 0 0-.8-.7Zm3 0a.8.8 0 1 0 .8.7.8.8 0 0 0-.8-.7Z"/></svg>
-      </button>
-      <div class="contact-tooltip">WeChat</div>
-    </div>
-  </div>
 </body>
 </html>
-
-
-
-
-
-
-
